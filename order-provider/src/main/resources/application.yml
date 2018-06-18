@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: cloud-order
+server:
+  port: 8010
+eureka:
+  client:
+    registryFetchIntervalSeconds: 60
+    instanceInfoReplicationIntervalSeconds: 60
+    serviceUrl:
+      defaultZone: http://localhost:12345/eureka/
+    healthcheck:
+      enabled: true
+  instance:
+    statusPageUrlPath: /actuator/health
