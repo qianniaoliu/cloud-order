@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: cloud-order
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 47.96.81.112
+          defaultBrokerPort: 9092
+      bindings:
+        output:
+          destination: athena-topic
+  sleuth:
+    sampler:
+      probability: 0.1
+
+server:
+  port: 9002
+eureka:
+  client:
+    registryFetchIntervalSeconds: 60
+    instanceInfoReplicationIntervalSeconds: 60
+    serviceUrl:
+      defaultZone: http://47.96.81.112:9000/eureka/
+    healthcheck:
+      enabled: true
+  instance:
+    statusPageUrlPath: /actuator/health
+feign:
+  hystrix:
+    enabled: true
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          sleuth: DEBUG

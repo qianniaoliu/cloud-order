@@ -1,9 +1,12 @@
 package com.athena.px.orderprovider.config;
 
+import com.athena.px.hystrix.PayHystrix;
+import com.netflix.loadbalancer.IRule;
+import com.netflix.loadbalancer.RandomRule;
+import com.netflix.loadbalancer.RetryRule;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -17,6 +20,16 @@ public class EurekaConfig {
     @Bean
     @LoadBalanced
     public RestTemplate restTemplate(){
-        return new RestTemplate(new OkHttp3ClientHttpRequestFactory());
+        return new RestTemplate();
+    }
+
+    @Bean
+    public IRule randomRule(){
+        return new RetryRule(new RandomRule(),3);
+    }
+
+    @Bean
+    public PayHystrix payHystrix(){
+        return new PayHystrix();
     }
 }

@@ -1,13 +1,3 @@
 spring:
-  application:
-    name: cloud-order
-server:
-  port: 8010
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:12345/eureka/
-    healthcheck:
-      enabled: true
-  instance:
-    statusPageUrlPath: /actuator/health
+  profiles:
+    active: dev
